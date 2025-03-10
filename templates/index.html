@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Fare Prediction</title>
+</head>
+<body>
+    <h2>Predikcija Cijene Taksija</h2>
+
+    <form action="/predict" method="post">
+        <label>Unesite JSON podatke:</label><br>
+        <textarea name="json_data" rows="15" cols="50" required></textarea><br><br>
+        <input type="submit" value="Send">
+    </form>
+
+    <h3>Rezultat:</h3>
+    <pre>Trip Price: {{ trip_price }}</pre>    
+
+</body>
+</html>
