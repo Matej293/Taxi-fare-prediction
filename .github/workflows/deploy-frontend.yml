@@ -23,12 +23,21 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
 
+    - name: List files in the frontend directory
+      run: ls ./frontend
+
+    - name: Check current directory
+      run: pwd
+
+    - name: Clear npm cache
+      run: npm cache clean --force
+
     - name: Install dependencies, build, and test (Frontend)
       working-directory: ./frontend
       run: |
-        npm install                   # Install the dependencies in frontend
-        npm run build --if-present     # Build the frontend project (if applicable)
-        npm run test --if-present      # Run tests (if applicable)
+        npm install                # Install the dependencies in frontend
+        npm run build --if-present  # Build the frontend project (if applicable)
+        npm run test --if-present   # Run tests (if applicable)
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v4
