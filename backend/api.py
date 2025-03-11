@@ -2,12 +2,16 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import urllib.request
 import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-AZURE_ML_URL = "http://3c4ddc13-5fc5-42d4-97d7-2bfef080986b.westeurope.azurecontainer.io/score"
-API_KEY = "wbWPj7AwD81x870kQgz1ILJxGF7zb0A8"
+AZURE_ML_URL = os.getenv("AZURE_ML_URL")
+API_KEY = os.getenv("API_KEY")
 
 MIN_PRICE = 6.1269
 MAX_PRICE = 332.0436887
