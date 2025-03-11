@@ -5,7 +5,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: taxi-fare-prediction
-  AZURE_WEBAPP_PACKAGE_PATH: './frontend'
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
   NODE_VERSION: '20.9.0'
 
 permissions:
@@ -24,7 +24,6 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies, build, and test (Frontend)
-      working-directory: ./frontend
       run: |
         npm install                # Install the dependencies in frontend
         npm run build --if-present  # Build the frontend project (if applicable)
@@ -34,7 +33,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: frontend-app
-        path: ./frontend
 
   deploy:
     permissions:
@@ -57,4 +55,3 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: './frontend/build'
