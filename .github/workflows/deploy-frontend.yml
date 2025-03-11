@@ -28,7 +28,9 @@ jobs:
         npm install                # Install the dependencies in frontend
         npm run build --if-present  # Build the frontend project (if applicable)
         npm run test --if-present   # Run tests (if applicable)
-
+      env:
+          CI: true  # Ensure Jest runs in CI mode
+          
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v4
       with:
