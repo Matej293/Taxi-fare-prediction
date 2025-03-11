@@ -5,7 +5,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: taxi-fare-prediction
-  AZURE_WEBAPP_PACKAGE_PATH: 'frontend'
+  AZURE_WEBAPP_PACKAGE_PATH: './frontend'
   NODE_VERSION: '20.9.0'
 
 permissions:
@@ -22,15 +22,6 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
-
-    - name: List files in the frontend directory
-      run: ls ./frontend
-
-    - name: Check current directory
-      run: pwd
-
-    - name: Clear npm cache
-      run: npm cache clean --force
 
     - name: Install dependencies, build, and test (Frontend)
       working-directory: ./frontend
