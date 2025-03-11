@@ -31,7 +31,7 @@ jobs:
           source venv/bin/activate
 
       - name: Install dependencies
-        working-directory: ./backend
+        working-directory: ./
         run: pip install -r requirements.txt
 
       - name: Upload artifact for deployment jobs
