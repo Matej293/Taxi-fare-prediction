@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import urllib.request
 import json
@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='build')
 CORS(app)
 
 AZURE_ML_URL = os.getenv("AZURE_ML_URL")
@@ -18,6 +18,10 @@ MAX_PRICE = 332.0436887
 
 def denormalize(normalized_value, min_value=MIN_PRICE, max_value=MAX_PRICE):
     return normalized_value * (max_value - min_value) + min_value
+
+@app.route('/')
+def serve_index():
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
