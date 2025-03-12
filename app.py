@@ -3,7 +3,7 @@ from flask_cors import CORS
 import urllib.request
 import json
 
-app = Flask(__name__, static_folder='build')
+app = Flask(__name__, static_folder="/home/site/wwwroot/build", static_url_path="")
 CORS(app)
 
 AZURE_ML_URL = "http://3c4ddc13-5fc5-42d4-97d7-2bfef080986b.westeurope.azurecontainer.io/score"
@@ -15,9 +15,13 @@ MAX_PRICE = 332.0436887
 def denormalize(normalized_value, min_value=MIN_PRICE, max_value=MAX_PRICE):
     return normalized_value * (max_value - min_value) + min_value
 
-@app.route('/')
+@app.route("/")
 def serve_index():
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory(app.static_folder, "index.html")
+
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory(app.static_folder, "index.html")
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -53,4 +57,4 @@ def predict():
         return jsonify({"error": str(e)}), 400
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=8000)

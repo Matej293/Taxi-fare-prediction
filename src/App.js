@@ -45,7 +45,6 @@ function App() {
     setError(null);
     setLoading(true);
 
-    // Include Trip_Price in request
     const requestData = { ...formData, Trip_Price: 0.0 };
 
     try {
