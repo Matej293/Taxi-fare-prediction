@@ -49,7 +49,7 @@ function App() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/predict",
+        "https://taxi-fare-prediction-webapp.azurewebsites.net/predict",
         requestData,
         {
           headers: { "Content-Type": "application/json" },
